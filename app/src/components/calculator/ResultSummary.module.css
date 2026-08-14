@@ -1,0 +1,80 @@
+.summary {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  padding: var(--space-4);
+  text-align: left;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headlineLabel {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.headlineValue {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.positive {
+  color: var(--color-positive);
+}
+
+.negative {
+  color: var(--color-negative);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 14px;
+}
+
+.row dt {
+  color: var(--color-text-muted);
+}
+
+.row dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.errorBox {
+  border: 1px solid var(--color-error-border);
+  background: var(--color-error-bg);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  text-align: left;
+}
+
+.errorTitle {
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+  color: var(--color-negative);
+}
+
+.errorList {
+  margin: 0;
+  padding-left: var(--space-4);
+  font-size: 14px;
+  color: var(--color-negative);
+}

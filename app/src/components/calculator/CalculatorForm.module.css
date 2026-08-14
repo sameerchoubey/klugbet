@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  text-align: left;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fieldRow {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.fieldRow > * {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .fieldRow {
+    flex-direction: column;
+  }
+}
