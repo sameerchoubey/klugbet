@@ -11,6 +11,31 @@ function formatEuro(value: number): string {
   return value.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })
 }
 
+function MeterRow({ label, value, maxAbs }: { label: string; value: number; maxAbs: number }) {
+  const isPositive = value >= 0
+  const widthPct = maxAbs > 0 ? Math.min(100, (Math.abs(value) / maxAbs) * 50) : 0
+
+  return (
+    <div className={styles.meterRow}>
+      <span className={styles.meterLabel}>{label}</span>
+      <div className={styles.meterTrack}>
+        <div className={styles.meterBaseline} />
+        <div
+          className={`${styles.meterBar} ${isPositive ? styles.barPositive : styles.barNegative}`}
+          style={
+            isPositive
+              ? { left: '50%', width: `${widthPct}%`, borderRadius: '0 4px 4px 0' }
+              : { right: '50%', width: `${widthPct}%`, borderRadius: '4px 0 0 4px' }
+          }
+        />
+      </div>
+      <span className={`${styles.meterValue} ${isPositive ? styles.positive : styles.negative}`}>
+        {formatEuro(value)}
+      </span>
+    </div>
+  )
+}
+
 export function ResultSummary({ outcome, config }: ResultSummaryProps) {
   if (!outcome.ok) {
     return (
@@ -27,6 +52,7 @@ export function ResultSummary({ outcome, config }: ResultSummaryProps) {
 
   const { result } = outcome
   const isPositive = result.guaranteedProfit >= 0
+  const meterMax = Math.max(Math.abs(result.backWinProfit), Math.abs(result.layWinProfit), 0.01)
 
   return (
     <div className={styles.summary}>
@@ -34,8 +60,15 @@ export function ResultSummary({ outcome, config }: ResultSummaryProps) {
         <span className={styles.headlineLabel}>{config.resultLabel}</span>
         <span className={`${styles.headlineValue} ${isPositive ? styles.positive : styles.negative}`}>
           {formatEuro(result.guaranteedProfit)}
-          {config.showReturnPct && result.returnPct !== null ? ` (${result.returnPct.toFixed(1)}%)` : null}
         </span>
+        {config.showReturnPct && result.returnPct !== null ? (
+          <span className={styles.headlinePct}>{result.returnPct.toFixed(1)}% of stake</span>
+        ) : null}
+      </div>
+
+      <div className={styles.meter}>
+        <MeterRow label={config.winRowLabel} value={result.backWinProfit} maxAbs={meterMax} />
+        <MeterRow label={config.loseRowLabel} value={result.layWinProfit} maxAbs={meterMax} />
       </div>
 
       <dl className={styles.grid}>
@@ -47,16 +80,9 @@ export function ResultSummary({ outcome, config }: ResultSummaryProps) {
           <dt>Liability</dt>
           <dd>{formatEuro(result.liability)}</dd>
         </div>
-        <div className={styles.row}>
-          <dt>{config.winRowLabel}</dt>
-          <dd>{formatEuro(result.backWinProfit)}</dd>
-        </div>
-        <div className={styles.row}>
-          <dt>{config.loseRowLabel}</dt>
-          <dd>{formatEuro(result.layWinProfit)}</dd>
-        </div>
         {config.showRefundField ? (
           <>
+            <div className={styles.subheading}>Refund breakdown</div>
             <div className={styles.row}>
               <dt>Refund Lay Stake</dt>
               <dd>{formatEuro(result.refundLayStake ?? 0)}</dd>

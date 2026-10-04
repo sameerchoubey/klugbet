@@ -3,6 +3,7 @@ import type { CalculatorMode } from './types'
 export interface CalculatorModeConfig {
   mode: CalculatorMode
   title: string
+  description: string
   stakeLabel: string
   stakeHelperText: string
   /** Whether the back side risks the user's own money */
@@ -20,6 +21,7 @@ export const MODE_CONFIG: Record<CalculatorMode, CalculatorModeConfig> = {
   qualifying: {
     mode: 'qualifying',
     title: 'Qualifying Bet Calculator',
+    description: 'Hedge your qualifying bet to lock in a small, predictable loss and unlock the bookmaker bonus.',
     stakeLabel: 'Back Stake (€)',
     stakeHelperText: 'The real-money amount you bet at the bookmaker to qualify for the bonus.',
     showBackRisk: true,
@@ -32,6 +34,7 @@ export const MODE_CONFIG: Record<CalculatorMode, CalculatorModeConfig> = {
   freeBet: {
     mode: 'freeBet',
     title: 'Free Bet Calculator',
+    description: 'Turn a stake-not-returned free bet into guaranteed cash by hedging it at an exchange.',
     stakeLabel: 'Free Bet Amount (€)',
     stakeHelperText: 'The free bet token amount. Stake is never returned — only winnings are paid out.',
     showBackRisk: false,
@@ -44,6 +47,8 @@ export const MODE_CONFIG: Record<CalculatorMode, CalculatorModeConfig> = {
   jokerBet: {
     mode: 'jokerBet',
     title: 'Joker Bet Calculator',
+    description:
+      'Hedge a real-money bet, then extract extra value from the free bet you receive if it loses.',
     stakeLabel: 'Back Stake (€)',
     stakeHelperText: 'The real-money amount you bet at the bookmaker.',
     showBackRisk: true,

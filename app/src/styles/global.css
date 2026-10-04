@@ -13,17 +13,29 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
-  max-width: 720px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-6) var(--space-5) var(--space-8);
+}
+
+@media (max-width: 600px) {
+  #root {
+    padding: var(--space-5) var(--space-4) var(--space-7);
+  }
 }
 
 h1,
-h2 {
-  margin: 0 0 var(--space-2);
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 p {
@@ -32,4 +44,13 @@ p {
 
 button {
   font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
 }

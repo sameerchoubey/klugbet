@@ -30,76 +30,97 @@ export function CalculatorForm({ mode }: CalculatorFormProps) {
     : Object.fromEntries(outcome.errors.filter((e) => e.field !== 'general').map((e) => [e.field, e.message]))
 
   return (
-    <section className={styles.form}>
-      <h1 className={styles.title}>{config.title}</h1>
+    <section className={styles.layout}>
+      <div className={styles.formColumn}>
+        <h2 className={styles.title}>{config.title}</h2>
+        <p className={styles.description}>{config.description}</p>
 
-      <div className={styles.fields}>
-        <NumberField
-          id={`${mode}-stake`}
-          label={config.stakeLabel}
-          helperText={config.stakeHelperText}
-          value={stake}
-          onChange={setStake}
-          min={0}
-          suffix="€"
-          error={fieldErrors.stake}
-        />
-        <div className={styles.fieldRow}>
-          <NumberField
-            id={`${mode}-back-odds`}
-            label="Back Odds (decimal)"
-            value={backOdds}
-            onChange={setBackOdds}
-            min={1.01}
-            error={fieldErrors.backOdds}
-          />
-          <NumberField
-            id={`${mode}-back-commission`}
-            label="Back Commission / Tax"
-            helperText="Tax on the full settlement (stake + winnings) on a win — e.g. German Wettsteuer. Leave at 0% if odds already include it."
-            value={backCommissionPct}
-            onChange={setBackCommissionPct}
-            min={0}
-            step={0.1}
-            suffix="%"
-            error={fieldErrors.backCommissionPct}
-          />
+        <div className={styles.card}>
+          <div className={styles.section}>
+            <span className={styles.sectionLabel}>Your Bet</span>
+            <NumberField
+              id={`${mode}-stake`}
+              label={config.stakeLabel}
+              helperText={config.stakeHelperText}
+              value={stake}
+              onChange={setStake}
+              min={0}
+              suffix="€"
+              error={fieldErrors.stake}
+            />
+            <div className={styles.fieldRow}>
+              <NumberField
+                id={`${mode}-back-odds`}
+                label="Back Odds (decimal)"
+                value={backOdds}
+                onChange={setBackOdds}
+                min={1.01}
+                error={fieldErrors.backOdds}
+              />
+              <NumberField
+                id={`${mode}-back-commission`}
+                label="Back Commission / Tax"
+                helperText="Tax on the full settlement (stake + winnings) on a win — e.g. German Wettsteuer. Leave at 0% if odds already include it."
+                value={backCommissionPct}
+                onChange={setBackCommissionPct}
+                min={0}
+                step={0.1}
+                suffix="%"
+                error={fieldErrors.backCommissionPct}
+              />
+            </div>
+          </div>
+
+          <div className={styles.divider} />
+
+          <div className={styles.section}>
+            <span className={styles.sectionLabel}>Your Hedge</span>
+            <div className={styles.fieldRow}>
+              <NumberField
+                id={`${mode}-lay-odds`}
+                label="Lay Odds (decimal)"
+                value={layOdds}
+                onChange={setLayOdds}
+                min={1.01}
+                error={fieldErrors.layOdds}
+              />
+              <NumberField
+                id={`${mode}-lay-commission`}
+                label="Exchange Commission"
+                value={layCommissionPct}
+                onChange={setLayCommissionPct}
+                min={0}
+                step={0.1}
+                suffix="%"
+                error={fieldErrors.layCommissionPct}
+              />
+            </div>
+          </div>
+
+          {config.showRefundField ? (
+            <>
+              <div className={styles.divider} />
+              <div className={styles.section}>
+                <span className={styles.sectionLabel}>Refund</span>
+                <NumberField
+                  id={`${mode}-refund`}
+                  label={config.refundLabel ?? 'Refund Amount (€)'}
+                  helperText={config.refundHelperText}
+                  value={refundAmount}
+                  onChange={setRefundAmount}
+                  min={0}
+                  suffix="€"
+                  error={fieldErrors.refundAmount}
+                />
+              </div>
+            </>
+          ) : null}
         </div>
-        <div className={styles.fieldRow}>
-          <NumberField
-            id={`${mode}-lay-odds`}
-            label="Lay Odds (decimal)"
-            value={layOdds}
-            onChange={setLayOdds}
-            min={1.01}
-            error={fieldErrors.layOdds}
-          />
-          <NumberField
-            id={`${mode}-lay-commission`}
-            label="Exchange Commission"
-            value={layCommissionPct}
-            onChange={setLayCommissionPct}
-            min={0}
-            step={0.1}
-            suffix="%"
-            error={fieldErrors.layCommissionPct}
-          />
-        </div>
-        {config.showRefundField ? (
-          <NumberField
-            id={`${mode}-refund`}
-            label={config.refundLabel ?? 'Refund Amount (€)'}
-            helperText={config.refundHelperText}
-            value={refundAmount}
-            onChange={setRefundAmount}
-            min={0}
-            suffix="€"
-            error={fieldErrors.refundAmount}
-          />
-        ) : null}
       </div>
 
-      <ResultSummary outcome={outcome} config={config} />
+      <div className={styles.resultColumn}>
+        <ResultSummary outcome={outcome} config={config} />
+      </div>
     </section>
   )
 }

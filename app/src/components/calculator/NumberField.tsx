@@ -28,11 +28,12 @@ export function NumberField({
       <label htmlFor={id} className={styles.label}>
         {label}
       </label>
-      <div className={styles.inputRow}>
+      <div className={styles.inputWrap}>
         <input
           id={id}
           type="number"
           className={styles.input}
+          style={suffix ? { paddingRight: 40 } : undefined}
           value={Number.isNaN(value) ? '' : value}
           step={step}
           min={min}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Header } from './components/layout/Header'
 import { TabNav } from './components/layout/TabNav'
 import type { CalculatorMode } from './lib/calculators/types'
 import { QualifyingBetPage } from './pages/QualifyingBetPage'
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <TabNav active={activeTab} onChange={setActiveTab} />
       <div role="tabpanel" id={`panel-${activeTab}`} aria-labelledby={`tab-${activeTab}`}>
         <ActivePage />

@@ -1,30 +1,40 @@
 .summary {
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background: var(--color-surface);
-  padding: var(--space-4);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
   text-align: left;
 }
 
 .headline {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding-bottom: var(--space-4);
-  margin-bottom: var(--space-4);
+  gap: 2px;
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
   border-bottom: 1px solid var(--color-border);
 }
 
 .headlineLabel {
-  font-size: 13px;
-  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: var(--color-text-faint);
 }
 
 .headlineValue {
-  font-size: 28px;
+  font-family: var(--font-sans);
+  font-size: 36px;
   font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.headlinePct {
+  font-size: 13px;
+  color: var(--color-text-muted);
 }
 
 .positive {
@@ -34,6 +44,71 @@
 .negative {
   color: var(--color-negative);
 }
+
+/* Comparison meter */
+
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.meterRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(70px, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.meterLabel {
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: var(--color-text-muted);
+}
+
+.meterTrack {
+  position: relative;
+  height: 20px;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.meterBaseline {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border-strong);
+  transform: translateX(-1px);
+}
+
+.meterBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.barPositive {
+  background: var(--color-positive);
+}
+
+.barNegative {
+  background: var(--color-negative);
+}
+
+.meterValue {
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Breakdown list */
 
 .grid {
   display: flex;
@@ -56,13 +131,23 @@
 .row dd {
   margin: 0;
   font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.subheading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-top: var(--space-2);
 }
 
 .errorBox {
   border: 1px solid var(--color-error-border);
   background: var(--color-error-bg);
-  border-radius: var(--radius);
-  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
   text-align: left;
 }
 
